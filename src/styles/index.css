@@ -9,6 +9,7 @@
   background: rgba(15, 23, 42, 0.95);
   color: white;
   border-radius: 12px;
+  -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(100, 116, 139, 0.3);
 }
