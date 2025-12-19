@@ -1,27 +1,21 @@
 # 🎬 Hyderabad Cinemas
 
-An interactive guide to 98 movie theaters across Hyderabad — from iconic single screens to premium multiplexes.
+An interactive guide to movie theaters in Hyderabad, India. Explore 98 cinemas from iconic single screens to premium multiplexes.
 
-![Hyderabad Cinemas](https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=1200&q=80)
+![React](https://img.shields.io/badge/React-18.2-blue)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.3-blue)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4-blue)
+![Vite](https://img.shields.io/badge/Vite-5.0-purple)
 
 ## ✨ Features
 
-- **98 Theaters**: Complete database of cinemas across Hyderabad
-- **Real Photos**: Actual theater images from Google Maps
-- **Interactive Map**: View all theaters on Leaflet-powered map
-- **Advanced Filters**: Filter by type, location, sound system, and projection
-- **Detailed Info**: Screens, seating capacity, unique features, and more
-- **Google Maps Integration**: Get directions and view photos
-
-## 🏢 Theater Types
-
-| Type | Count | Examples |
-|------|-------|----------|
-| Multiplex | 53 | AMB Cinemas, Prasads, PVR, INOX |
-| Single Screen | 38 | Sandhya 70MM, Devi 70MM, Sudarshan 35MM |
-| Twin Theaters | 2 | Asian Sha & Shahensha |
-| Boutique | 2 | Connplex, Roongta Novum |
-| Upcoming | 4 | Allu Cinemas, PVR INOX Odeon Mall |
+- **98 Theaters**: Complete database of Hyderabad's cinema halls
+- **Interactive Map**: View theaters on an interactive map with Leaflet
+- **Smart Filtering**: Filter by type, location, sound system, and projection
+- **Search**: Full-text search across names, locations, and features
+- **Favorites**: Save your favorite theaters
+- **Responsive Design**: Works on desktop, tablet, and mobile
+- **Dark Theme**: Beautiful dark UI with gradient accents
 
 ## 🚀 Quick Start
 
@@ -34,93 +28,97 @@ npm run dev
 
 # Build for production
 npm run build
-
-# Preview production build
-npm run preview
 ```
 
 ## 📁 Project Structure
 
 ```
-├── src/
-│   ├── App.tsx              # Main application component
-│   ├── main.tsx             # Application entry point
-│   ├── data/
-│   │   └── locations.ts     # Hyderabad area coordinates
-│   ├── styles/
-│   │   └── index.css        # Global styles & Tailwind
-│   ├── types/
-│   │   └── theater.ts       # TypeScript definitions
-│   └── utils/
-│       └── helpers.ts       # Utility functions
-├── public/
-│   └── theaters/            # Scraped theater images
-├── scripts/
-│   ├── scrape-theater-images.js  # Puppeteer image scraper
-│   ├── fetch-theater-images.js   # Google Places API fetcher
-│   └── README.md                 # Scripts documentation
-├── index.html
-├── package.json
-├── tailwind.config.js
-├── tsconfig.json
-└── vite.config.ts
+src/
+├── components/           # React components
+│   ├── TheaterCard.tsx   # Grid view card
+│   ├── TheaterListItem.tsx  # List view item
+│   ├── TheaterModal.tsx  # Detail modal
+│   ├── MapView.tsx       # Interactive map
+│   ├── StatCard.tsx      # Statistics card
+│   └── index.ts          # Barrel export
+├── data/
+│   ├── theaters.ts       # Theater data (98 entries)
+│   ├── locations.ts      # Location coordinates
+│   └── index.ts          # Barrel export
+├── types/
+│   ├── theater.ts        # TypeScript interfaces
+│   └── index.ts          # Barrel export
+├── utils/
+│   ├── helpers.ts        # Utility functions
+│   └── index.ts          # Barrel export
+├── styles/
+│   └── index.css         # Global styles + Tailwind
+├── App.tsx               # Main application
+└── main.tsx              # Entry point
 ```
 
-## 🖼️ Fetching Theater Images
+## 🖼️ Theater Images
 
-Theater images are scraped from Google Maps. To fetch/update images:
+Theater images can be fetched using the included scraper:
 
 ```bash
-# Using Puppeteer (free, no API key required)
-npm run scrape-images           # Headless mode
-npm run scrape-images:debug     # With visible browser (recommended)
+# Scrape images from Google Maps (free, no API key)
+npm run scrape-images
 
-# Using Google Places API (requires API key)
-GOOGLE_PLACES_API_KEY=your_key npm run fetch-images
+# Debug mode (visible browser)
+npm run scrape-images:debug
 ```
 
-See [scripts/README.md](scripts/README.md) for detailed documentation.
+Images are saved to `public/theaters/` and automatically used by the app.
 
 ## 🛠️ Tech Stack
 
 - **React 18** - UI framework
 - **TypeScript** - Type safety
-- **Vite** - Build tool & dev server
+- **Vite** - Build tool
 - **Tailwind CSS** - Styling
-- **Leaflet** - Interactive maps
+- **Leaflet / React-Leaflet** - Maps
 - **Lucide React** - Icons
+- **Puppeteer** - Image scraping (optional)
 
-## 🌟 Key Theaters
+## 📊 Theater Categories
 
-### Premium Multiplexes
-- **AMB Cinemas** (Gachibowli) - Co-owned by Mahesh Babu, India's first HDR trial
-- **Prasads** (Khairatabad) - Largest screen in India (PCX 101.6ft)
-- **AAA Cinemas** (Ameerpet) - First LED cinema in Telangana
+| Type | Count | Description |
+|------|-------|-------------|
+| Multiplex | 45+ | Multi-screen complexes |
+| Single Screen | 40+ | Classic 70mm theaters |
+| Boutique | 2 | Premium small venues |
+| Upcoming | 4 | Opening in 2026 |
 
-### Legendary Single Screens
-- **Sandhya 70MM** (RTC X Roads) - Paper snowstorm fan celebrations
-- **Devi 70MM** (RTC X Roads) - First theater to gross ₹1Cr in AP
-- **Sudarshan 35MM** (RTC X Roads) - Considered best single screen in HYD
+## 🗺️ Coverage Areas
 
-## 📊 Data Source
+The app covers theaters across Hyderabad including:
+- IT Corridor (Gachibowli, Madhapur, Kukatpally)
+- Old City (RTC X Roads, Abids, Kachiguda)
+- Secunderabad (Malkajgiri, ECIL, Kompally)
+- Suburbs (Miyapur, Attapur, LB Nagar)
 
-Theater data sourced from a curated CSV containing:
-- Theater name and location
-- Number of screens and key screen info
+## 📝 Data Source
+
+Theater data includes:
+- Name and location
+- Screen count and seating capacity
 - Sound system (Dolby Atmos, 7.1, etc.)
-- Projection type (4K Laser, Digital, etc.)
-- Seating capacity
-- Unique features and user reviews
-
-## 📄 License
-
-MIT License - feel free to use and modify.
+- Projection (4K Laser, LED, Digital)
+- Key features and highlights
+- Approximate coordinates
 
 ## 🤝 Contributing
 
-Contributions welcome! Please feel free to submit a Pull Request.
+Contributions are welcome! Feel free to:
+- Report inaccuracies in theater data
+- Suggest new features
+- Submit pull requests
+
+## 📄 License
+
+MIT License - feel free to use this for your own projects.
 
 ---
 
 Made with ❤️ for Hyderabad cinema lovers
-
