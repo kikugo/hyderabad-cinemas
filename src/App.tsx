@@ -135,6 +135,19 @@ const TheaterExplorer = () => {
     }
   }, [favorites]);
 
+  useEffect(() => {
+    if (!selectedTheater) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setSelectedTheater(null);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [selectedTheater]);
+
   // Reset all filters
   const clearFilters = () => {
     setSearchTerm('');
