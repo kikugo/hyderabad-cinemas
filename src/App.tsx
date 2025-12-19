@@ -32,6 +32,7 @@ const TheaterExplorer = () => {
   // View state
   const [view, setView] = useState<ViewMode>('grid');
   const [mainView, setMainView] = useState<MainView>('theaters');
+  const [sortOption, setSortOption] = useState<'name-asc' | 'name-desc' | 'screens-desc' | 'screens-asc'>('name-asc');
 
   // Search and filter state
   const [searchTerm, setSearchTerm] = useState('');
@@ -135,9 +136,26 @@ const TheaterExplorer = () => {
     setFilters({ type: 'all', sound: 'all', projection: 'all', location: 'all' });
   };
 
+  const sortTheaters = (list: Theater[]) => {
+    const sorted = [...list];
+    switch (sortOption) {
+      case 'name-desc':
+        return sorted.sort((a, b) => b.name.localeCompare(a.name));
+      case 'screens-desc':
+        return sorted.sort((a, b) => (b.screens || 0) - (a.screens || 0));
+      case 'screens-asc':
+        return sorted.sort((a, b) => (a.screens || 0) - (b.screens || 0));
+      case 'name-asc':
+      default:
+        return sorted.sort((a, b) => a.name.localeCompare(b.name));
+    }
+  };
+
   // Get theaters for current view
   const displayedTheaters =
-    mainView === 'favorites' ? theaters.filter(t => favorites.includes(t.id)) : filteredTheaters;
+    mainView === 'favorites'
+      ? sortTheaters(theaters.filter(t => favorites.includes(t.id)))
+      : sortTheaters(filteredTheaters);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-white">
@@ -271,6 +289,20 @@ const TheaterExplorer = () => {
                       {p}
                     </option>
                   ))}
+                </select>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <select
+                  value={sortOption}
+                  onChange={e => setSortOption(e.target.value as typeof sortOption)}
+                  className="px-4 py-3 bg-slate-800/50 border border-slate-700 rounded-xl text-white focus:outline-none focus:border-cyan-500 transition-all cursor-pointer"
+                  aria-label="Sort theaters"
+                >
+                  <option value="name-asc">Sort: Name (A → Z)</option>
+                  <option value="name-desc">Sort: Name (Z → A)</option>
+                  <option value="screens-desc">Sort: Screens (High → Low)</option>
+                  <option value="screens-asc">Sort: Screens (Low → High)</option>
                 </select>
               </div>
             </div>
