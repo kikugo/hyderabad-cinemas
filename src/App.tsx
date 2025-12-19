@@ -332,7 +332,7 @@ const TheaterExplorer = () => {
                       ? 'bg-purple-600/30 border-purple-400/40 text-purple-100'
                       : 'bg-slate-800/50 border-slate-700 text-slate-200 hover:border-cyan-500/50'
                   }`}
-                  aria-pressed={atmosOnly}
+                  aria-pressed={atmosOnly ? 'true' : 'false'}
                   aria-label="Toggle Atmos-only theaters"
                 >
                   {atmosOnly ? 'Atmos only: ON' : 'Atmos only: OFF'}

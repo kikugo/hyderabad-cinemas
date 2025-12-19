@@ -1,8 +1,10 @@
+/* stylelint-disable at-rule-no-unknown */
 @import 'leaflet/dist/leaflet.css';
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+/* stylelint-enable at-rule-no-unknown */
 
 /* Leaflet popup customization */
 .leaflet-popup-content-wrapper {
