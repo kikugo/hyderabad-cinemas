@@ -1,0 +1,3 @@
+# This file ensures the theaters directory exists in git
+# Theater images are scraped using: npm run scrape-images
+
