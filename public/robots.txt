@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://kikugo.github.io/hyderabad-cinemas/sitemap.txt
+
