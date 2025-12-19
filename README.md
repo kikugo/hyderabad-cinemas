@@ -33,28 +33,41 @@ npm run build
 ## 📁 Project Structure
 
 ```
-src/
-├── components/           # React components
-│   ├── TheaterCard.tsx   # Grid view card
-│   ├── TheaterListItem.tsx  # List view item
-│   ├── TheaterModal.tsx  # Detail modal
-│   ├── MapView.tsx       # Interactive map
-│   ├── StatCard.tsx      # Statistics card
-│   └── index.ts          # Barrel export
-├── data/
-│   ├── theaters.ts       # Theater data (98 entries)
-│   ├── locations.ts      # Location coordinates
-│   └── index.ts          # Barrel export
-├── types/
-│   ├── theater.ts        # TypeScript interfaces
-│   └── index.ts          # Barrel export
-├── utils/
-│   ├── helpers.ts        # Utility functions
-│   └── index.ts          # Barrel export
-├── styles/
-│   └── index.css         # Global styles + Tailwind
-├── App.tsx               # Main application
-└── main.tsx              # Entry point
+├── data/                     # Raw data files
+│   └── CINEMA_HYD.csv        # Original theater dataset
+├── public/
+│   └── theaters/             # Scraped theater images
+├── scripts/                  # Utility scripts
+│   ├── fetch-theater-images.js   # Google Places API fetcher
+│   └── scrape-theater-images.js  # Puppeteer scraper
+├── src/
+│   ├── components/           # React components
+│   │   ├── TheaterCard.tsx   # Grid view card
+│   │   ├── TheaterListItem.tsx  # List view item
+│   │   ├── TheaterModal.tsx  # Detail modal
+│   │   ├── MapView.tsx       # Interactive map
+│   │   ├── StatCard.tsx      # Statistics card
+│   │   └── index.ts          # Barrel export
+│   ├── data/
+│   │   ├── theaters.ts       # Theater data (98 entries)
+│   │   ├── locations.ts      # Location coordinates
+│   │   └── index.ts          # Barrel export
+│   ├── types/
+│   │   ├── theater.ts        # TypeScript interfaces
+│   │   └── index.ts          # Barrel export
+│   ├── utils/
+│   │   ├── helpers.ts        # Utility functions
+│   │   └── index.ts          # Barrel export
+│   ├── styles/
+│   │   └── index.css         # Global styles + Tailwind
+│   ├── App.tsx               # Main application
+│   └── main.tsx              # Entry point
+├── index.html                # HTML entry point
+├── package.json              # Dependencies & scripts
+├── vite.config.ts            # Vite configuration
+├── tailwind.config.js        # Tailwind CSS config
+├── tsconfig.json             # TypeScript config
+└── README.md
 ```
 
 ## 🖼️ Theater Images
