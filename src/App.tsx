@@ -152,6 +152,8 @@ const TheaterExplorer = () => {
   const clearFilters = () => {
     setSearchTerm('');
     setFilters({ type: 'all', sound: 'all', projection: 'all', location: 'all' });
+    setSortOption('name-asc');
+    setAtmosOnly(false);
   };
 
   const sortTheaters = (list: Theater[]) => {
@@ -334,6 +336,15 @@ const TheaterExplorer = () => {
                   aria-label="Toggle Atmos-only theaters"
                 >
                   {atmosOnly ? 'Atmos only: ON' : 'Atmos only: OFF'}
+                </button>
+              </div>
+
+              <div className="flex flex-wrap gap-2 justify-end">
+                <button
+                  onClick={clearFilters}
+                  className="px-4 py-2 rounded-lg bg-slate-800/60 border border-slate-700 text-slate-200 hover:border-cyan-500/50 transition-colors text-sm font-semibold"
+                >
+                  Reset filters
                 </button>
               </div>
             </div>
