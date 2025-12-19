@@ -96,16 +96,17 @@ Images are saved to `public/theaters/` and automatically used by the app.
 
 ## 📊 Theater Categories
 
-| Type | Count | Description |
-|------|-------|-------------|
-| Multiplex | 45+ | Multi-screen complexes |
-| Single Screen | 40+ | Classic 70mm theaters |
-| Boutique | 2 | Premium small venues |
-| Upcoming | 4 | Opening in 2026 |
+| Type          | Count | Description            |
+| ------------- | ----- | ---------------------- |
+| Multiplex     | 45+   | Multi-screen complexes |
+| Single Screen | 40+   | Classic 70mm theaters  |
+| Boutique      | 2     | Premium small venues   |
+| Upcoming      | 4     | Opening in 2026        |
 
 ## 🗺️ Coverage Areas
 
 The app covers theaters across Hyderabad including:
+
 - IT Corridor (Gachibowli, Madhapur, Kukatpally)
 - Old City (RTC X Roads, Abids, Kachiguda)
 - Secunderabad (Malkajgiri, ECIL, Kompally)
@@ -114,6 +115,7 @@ The app covers theaters across Hyderabad including:
 ## 📝 Data Source
 
 Theater data includes:
+
 - Name and location
 - Screen count and seating capacity
 - Sound system (Dolby Atmos, 7.1, etc.)
@@ -124,6 +126,7 @@ Theater data includes:
 ## 🤝 Contributing
 
 Contributions are welcome! Feel free to:
+
 - Report inaccuracies in theater data
 - Suggest new features
 - Submit pull requests

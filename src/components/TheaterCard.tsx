@@ -10,9 +10,14 @@ interface TheaterCardProps {
   onToggleFavorite: () => void;
 }
 
-export const TheaterCard = ({ theater, isFavorite, onSelect, onToggleFavorite }: TheaterCardProps) => {
+export const TheaterCard = ({
+  theater,
+  isFavorite,
+  onSelect,
+  onToggleFavorite,
+}: TheaterCardProps) => {
   const isUpcoming = theater.type.includes('Upcoming');
-  
+
   const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
     const target = e.target as HTMLImageElement;
     const fallback = getFallbackImage(theater.id, theater.type);
@@ -25,32 +30,35 @@ export const TheaterCard = ({ theater, isFavorite, onSelect, onToggleFavorite }:
     e.stopPropagation();
     const coords = locationCoords[theater.location] || HYDERABAD_CENTER;
     const searchQuery = encodeURIComponent(`${theater.name}, ${theater.location}, Hyderabad`);
-    window.open(`https://www.google.com/maps/search/${searchQuery}/@${coords[0]},${coords[1]},17z`, '_blank');
+    window.open(
+      `https://www.google.com/maps/search/${searchQuery}/@${coords[0]},${coords[1]},17z`,
+      '_blank'
+    );
   };
 
   const handleFavoriteClick = (e: React.MouseEvent) => {
     e.stopPropagation();
     onToggleFavorite();
   };
-  
+
   return (
-    <div 
+    <div
       className={`group bg-slate-900/80 backdrop-blur-sm rounded-2xl overflow-hidden border transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 cursor-pointer ${
-        isUpcoming 
-          ? 'border-amber-500/30 hover:border-amber-500/60 hover:shadow-amber-500/10' 
+        isUpcoming
+          ? 'border-amber-500/30 hover:border-amber-500/60 hover:shadow-amber-500/10'
           : 'border-slate-800 hover:border-cyan-500/50 hover:shadow-cyan-500/10'
       }`}
       onClick={onSelect}
     >
       <div className="relative h-48 overflow-hidden">
-        <img 
-          src={theater.image} 
+        <img
+          src={theater.image}
           alt={theater.name}
           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
           onError={handleImageError}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/50 to-transparent" />
-        
+
         <div className="absolute top-3 right-3 flex gap-2 z-10">
           <button
             onClick={openGoogleMaps}
@@ -65,14 +73,18 @@ export const TheaterCard = ({ theater, isFavorite, onSelect, onToggleFavorite }:
             className="p-2 bg-slate-900/80 backdrop-blur rounded-full hover:bg-cyan-600 transition-colors"
             aria-label={isFavorite ? 'Remove from favorites' : 'Add to favorites'}
           >
-            <Heart className={`w-5 h-5 ${isFavorite ? 'fill-red-500 text-red-500' : 'text-white'}`} />
+            <Heart
+              className={`w-5 h-5 ${isFavorite ? 'fill-red-500 text-red-500' : 'text-white'}`}
+            />
           </button>
         </div>
 
         <div className="absolute top-3 left-3 flex flex-wrap gap-2">
-          <span className={`px-3 py-1 backdrop-blur text-white rounded-full text-xs font-semibold ${
-            isUpcoming ? 'bg-amber-500/90' : 'bg-slate-900/90'
-          }`}>
+          <span
+            className={`px-3 py-1 backdrop-blur text-white rounded-full text-xs font-semibold ${
+              isUpcoming ? 'bg-amber-500/90' : 'bg-slate-900/90'
+            }`}
+          >
             {theater.type}
           </span>
           {theater.id === 94 && (
@@ -100,7 +112,9 @@ export const TheaterCard = ({ theater, isFavorite, onSelect, onToggleFavorite }:
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-2">
             <Film className="w-4 h-4 text-cyan-400" />
-            <span className="text-sm text-slate-400">{theater.screens} Screen{theater.screens > 1 ? 's' : ''}</span>
+            <span className="text-sm text-slate-400">
+              {theater.screens} Screen{theater.screens > 1 ? 's' : ''}
+            </span>
           </div>
           <div className="flex items-center gap-1">
             <span className="text-sm font-semibold text-yellow-400">{theater.priceRange}</span>
@@ -140,11 +154,13 @@ export const TheaterCard = ({ theater, isFavorite, onSelect, onToggleFavorite }:
 
         <p className="text-sm text-slate-400 line-clamp-2 mb-4">{theater.features}</p>
 
-        <button className={`w-full py-2.5 rounded-lg font-medium transition-all duration-300 flex items-center justify-center gap-2 ${
-          isUpcoming 
-            ? 'bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-500 hover:to-orange-500 text-white' 
-            : 'bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white'
-        }`}>
+        <button
+          className={`w-full py-2.5 rounded-lg font-medium transition-all duration-300 flex items-center justify-center gap-2 ${
+            isUpcoming
+              ? 'bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-500 hover:to-orange-500 text-white'
+              : 'bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white'
+          }`}
+        >
           {isUpcoming ? 'Coming Soon' : 'View Details'}
           <ChevronRight className="w-4 h-4" />
         </button>
@@ -152,4 +168,3 @@ export const TheaterCard = ({ theater, isFavorite, onSelect, onToggleFavorite }:
     </div>
   );
 };
-

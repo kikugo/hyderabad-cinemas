@@ -66,4 +66,11 @@ export const SOUND_SYSTEMS = ['Dolby Atmos', 'Dolby 7.1', 'Dolby Digital', 'DTS'
 /**
  * Projection type options for filtering
  */
-export const PROJECTION_TYPES = ['4K Laser', '4K Digital', '4K Projection', '2K Digital', 'LED', 'Laser'] as const;
+export const PROJECTION_TYPES = [
+  '4K Laser',
+  '4K Digital',
+  '4K Projection',
+  '2K Digital',
+  'LED',
+  'Laser',
+] as const;

@@ -1,4 +1,4 @@
-@import "leaflet/dist/leaflet.css";
+@import 'leaflet/dist/leaflet.css';
 
 @tailwind base;
 @tailwind components;
@@ -89,7 +89,8 @@ html {
 
 /* Gradient text animation */
 @keyframes gradient-shift {
-  0%, 100% {
+  0%,
+  100% {
     background-position: 0% 50%;
   }
   50% {
@@ -111,4 +112,3 @@ html {
 .hide-scrollbar::-webkit-scrollbar {
   display: none;
 }
-

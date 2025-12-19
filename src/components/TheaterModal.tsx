@@ -1,6 +1,17 @@
-import { 
-  X, MapPin, Film, Star, Zap, Heart, Users, Volume2, Projector, 
-  Navigation, Map, Sparkles, Clapperboard 
+import {
+  X,
+  MapPin,
+  Film,
+  Star,
+  Zap,
+  Heart,
+  Users,
+  Volume2,
+  Projector,
+  Navigation,
+  Map,
+  Sparkles,
+  Clapperboard,
 } from 'lucide-react';
 import type { Theater } from '../types/theater';
 import { locationCoords, HYDERABAD_CENTER } from '../data/locations';
@@ -13,9 +24,14 @@ interface TheaterModalProps {
   onToggleFavorite: () => void;
 }
 
-export const TheaterModal = ({ theater, isFavorite, onClose, onToggleFavorite }: TheaterModalProps) => {
+export const TheaterModal = ({
+  theater,
+  isFavorite,
+  onClose,
+  onToggleFavorite,
+}: TheaterModalProps) => {
   const isUpcoming = theater.type.includes('Upcoming');
-  
+
   const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
     const target = e.target as HTMLImageElement;
     const fallback = getFallbackImage(theater.id, theater.type);
@@ -31,32 +47,35 @@ export const TheaterModal = ({ theater, isFavorite, onClose, onToggleFavorite }:
   const openGoogleMaps = () => {
     const coords = getTheaterCoords();
     const searchQuery = encodeURIComponent(`${theater.name}, ${theater.location}, Hyderabad`);
-    window.open(`https://www.google.com/maps/search/${searchQuery}/@${coords[0]},${coords[1]},17z`, '_blank');
+    window.open(
+      `https://www.google.com/maps/search/${searchQuery}/@${coords[0]},${coords[1]},17z`,
+      '_blank'
+    );
   };
 
   const getDirectionsUrl = () => {
     return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(theater.name + ', ' + theater.location + ', Hyderabad')}`;
   };
-  
+
   return (
-    <div 
-      className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4" 
+    <div
+      className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
       onClick={onClose}
     >
-      <div 
+      <div
         className="bg-slate-900 rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto border border-slate-700 shadow-2xl"
-        onClick={(e) => e.stopPropagation()}
+        onClick={e => e.stopPropagation()}
       >
         {/* Header Image */}
         <div className="relative h-64">
-          <img 
-            src={theater.image} 
+          <img
+            src={theater.image}
             alt={theater.name}
             className="w-full h-full object-cover"
             onError={handleImageError}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/50 to-transparent" />
-          
+
           <button
             onClick={onClose}
             className="absolute top-4 right-4 p-2 bg-slate-900/80 backdrop-blur rounded-full hover:bg-slate-700 transition-colors"
@@ -64,20 +83,24 @@ export const TheaterModal = ({ theater, isFavorite, onClose, onToggleFavorite }:
           >
             <X className="w-5 h-5 text-white" />
           </button>
-          
+
           <button
             onClick={onToggleFavorite}
             className="absolute top-4 left-4 p-2 bg-slate-900/80 backdrop-blur rounded-full hover:bg-cyan-600 transition-colors"
             aria-label={isFavorite ? 'Remove from favorites' : 'Add to favorites'}
           >
-            <Heart className={`w-5 h-5 ${isFavorite ? 'fill-red-500 text-red-500' : 'text-white'}`} />
+            <Heart
+              className={`w-5 h-5 ${isFavorite ? 'fill-red-500 text-red-500' : 'text-white'}`}
+            />
           </button>
-          
+
           <div className="absolute bottom-4 left-4 right-4">
             <div className="flex flex-wrap gap-2 mb-2">
-              <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
-                isUpcoming ? 'bg-amber-500' : 'bg-cyan-600'
-              } text-white`}>
+              <span
+                className={`px-3 py-1 rounded-full text-xs font-semibold ${
+                  isUpcoming ? 'bg-amber-500' : 'bg-cyan-600'
+                } text-white`}
+              >
                 {theater.type}
               </span>
               {theater.id === 94 && (
@@ -102,7 +125,7 @@ export const TheaterModal = ({ theater, isFavorite, onClose, onToggleFavorite }:
             </div>
           </div>
         </div>
-        
+
         {/* Content */}
         <div className="p-6">
           {/* Quick Stats */}
@@ -119,16 +142,20 @@ export const TheaterModal = ({ theater, isFavorite, onClose, onToggleFavorite }:
             </div>
             <div className="bg-slate-800/50 rounded-xl p-3 text-center">
               <Volume2 className="w-6 h-6 text-pink-400 mx-auto mb-1" />
-              <div className="text-sm font-bold text-white leading-tight">{theater.sound.split('/')[0]}</div>
+              <div className="text-sm font-bold text-white leading-tight">
+                {theater.sound.split('/')[0]}
+              </div>
               <div className="text-xs text-slate-400">Sound</div>
             </div>
             <div className="bg-slate-800/50 rounded-xl p-3 text-center">
               <Projector className="w-6 h-6 text-orange-400 mx-auto mb-1" />
-              <div className="text-sm font-bold text-white leading-tight">{theater.projection.split('/')[0]}</div>
+              <div className="text-sm font-bold text-white leading-tight">
+                {theater.projection.split('/')[0]}
+              </div>
               <div className="text-xs text-slate-400">Projection</div>
             </div>
           </div>
-          
+
           {/* Key Screen Info */}
           {theater.keyScreen && theater.keyScreen !== 'TBA' && (
             <div className="bg-gradient-to-r from-cyan-500/10 to-purple-500/10 border border-cyan-500/20 rounded-xl p-4 mb-6">
@@ -139,7 +166,7 @@ export const TheaterModal = ({ theater, isFavorite, onClose, onToggleFavorite }:
               <p className="text-slate-300">{theater.keyScreen}</p>
             </div>
           )}
-          
+
           {/* Highlights */}
           {theater.highlights.length > 0 && (
             <div className="mb-6">
@@ -149,14 +176,17 @@ export const TheaterModal = ({ theater, isFavorite, onClose, onToggleFavorite }:
               </h3>
               <div className="flex flex-wrap gap-2">
                 {theater.highlights.map((h, i) => (
-                  <span key={i} className="px-3 py-1.5 bg-slate-800 text-slate-300 rounded-lg text-sm">
+                  <span
+                    key={i}
+                    className="px-3 py-1.5 bg-slate-800 text-slate-300 rounded-lg text-sm"
+                  >
                     {h}
                   </span>
                 ))}
               </div>
             </div>
           )}
-          
+
           {/* Tech Badges */}
           <div className="mb-6">
             <h3 className="font-semibold text-white mb-3 flex items-center gap-2">
@@ -191,7 +221,7 @@ export const TheaterModal = ({ theater, isFavorite, onClose, onToggleFavorite }:
               )}
             </div>
           </div>
-          
+
           {/* Features/USP */}
           <div className="mb-6">
             <h3 className="font-semibold text-white mb-3 flex items-center gap-2">
@@ -200,7 +230,7 @@ export const TheaterModal = ({ theater, isFavorite, onClose, onToggleFavorite }:
             </h3>
             <p className="text-slate-300 leading-relaxed">{theater.features}</p>
           </div>
-          
+
           {/* Price Range */}
           <div className="flex items-center justify-between p-4 bg-slate-800/50 rounded-xl">
             <div>
@@ -208,7 +238,7 @@ export const TheaterModal = ({ theater, isFavorite, onClose, onToggleFavorite }:
               <div className="text-xl font-bold text-yellow-400">{theater.priceRange}</div>
             </div>
             {!isUpcoming && (
-              <a 
+              <a
                 href={getDirectionsUrl()}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -229,4 +259,3 @@ export const TheaterModal = ({ theater, isFavorite, onClose, onToggleFavorite }:
     </div>
   );
 };
-
