@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import {
   Search,
   Film,
@@ -44,7 +44,14 @@ const TheaterExplorer = () => {
 
   // Selection and favorites state
   const [selectedTheater, setSelectedTheater] = useState<Theater | null>(null);
-  const [favorites, setFavorites] = useState<number[]>([]);
+  const [favorites, setFavorites] = useState<number[]>(() => {
+    try {
+      const stored = localStorage.getItem('hyd-cinemas:favorites');
+      return stored ? JSON.parse(stored) : [];
+    } catch {
+      return [];
+    }
+  });
 
   // Process raw theater data with computed fields
   const theaters: Theater[] = useMemo(
@@ -113,6 +120,14 @@ const TheaterExplorer = () => {
       prev.includes(theaterId) ? prev.filter(id => id !== theaterId) : [...prev, theaterId]
     );
   };
+
+  useEffect(() => {
+    try {
+      localStorage.setItem('hyd-cinemas:favorites', JSON.stringify(favorites));
+    } catch {
+      // ignore storage write errors
+    }
+  }, [favorites]);
 
   // Reset all filters
   const clearFilters = () => {
