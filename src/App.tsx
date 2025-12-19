@@ -33,6 +33,7 @@ const TheaterExplorer = () => {
   const [view, setView] = useState<ViewMode>('grid');
   const [mainView, setMainView] = useState<MainView>('theaters');
   const [sortOption, setSortOption] = useState<'name-asc' | 'name-desc' | 'screens-desc' | 'screens-asc'>('name-asc');
+  const [atmosOnly, setAtmosOnly] = useState(false);
 
   // Search and filter state
   const [searchTerm, setSearchTerm] = useState('');
@@ -83,9 +84,13 @@ const TheaterExplorer = () => {
         filters.projection === 'all' || t.projection.includes(filters.projection);
       const matchesLocation = filters.location === 'all' || t.location === filters.location;
 
-      return matchesSearch && matchesType && matchesSound && matchesProjection && matchesLocation;
+      const matchesAtmos = !atmosOnly || t.sound.includes('Atmos');
+
+      return (
+        matchesSearch && matchesType && matchesSound && matchesProjection && matchesLocation && matchesAtmos
+      );
     });
-  }, [theaters, searchTerm, filters]);
+  }, [theaters, searchTerm, filters, atmosOnly]);
 
   // Calculate statistics
   const stats = useMemo(() => {
@@ -304,6 +309,19 @@ const TheaterExplorer = () => {
                   <option value="screens-desc">Sort: Screens (High → Low)</option>
                   <option value="screens-asc">Sort: Screens (Low → High)</option>
                 </select>
+
+                <button
+                  onClick={() => setAtmosOnly(prev => !prev)}
+                  className={`px-4 py-3 rounded-xl border transition-all text-sm font-semibold ${
+                    atmosOnly
+                      ? 'bg-purple-600/30 border-purple-400/40 text-purple-100'
+                      : 'bg-slate-800/50 border-slate-700 text-slate-200 hover:border-cyan-500/50'
+                  }`}
+                  aria-pressed={atmosOnly}
+                  aria-label="Toggle Atmos-only theaters"
+                >
+                  {atmosOnly ? 'Atmos only: ON' : 'Atmos only: OFF'}
+                </button>
               </div>
             </div>
           </section>
