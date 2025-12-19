@@ -15,7 +15,8 @@
     "scrape-images": "node scripts/scrape-theater-images.js",
     "scrape-images:debug": "node scripts/scrape-theater-images.js --headless=false",
     "fetch-images": "node scripts/fetch-theater-images.js",
-    "fetch-images:dry": "node scripts/fetch-theater-images.js --dry-run"
+    "fetch-images:dry": "node scripts/fetch-theater-images.js --dry-run",
+    "export-data": "node scripts/export-theaters-json.js"
   },
   "dependencies": {
     "leaflet": "^1.9.4",
